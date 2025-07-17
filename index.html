@@ -11,23 +11,50 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <main class="card-container">
-        <div class="business-card">
-            <div class="card-logo">
-                <img src="pics/logo.png" alt="Logo">
+    <header>
+        <nav class="navbar">
+            <div class="dropdown">
+                <button class="dropbtn">MENU <i class="fas fa-caret-down"></i></button>
+                <div class="dropdown-content">
+                    <a href="#o-mnie">O mnie</a>
+                    <a href="#cennik">Cennik</a>
+                    <a href="#zasady">Zasady</a>
+                </div>
             </div>
-            <div class="card-content">
-                <p class="card-subtitle">Profesjonalne korepetycje z matematyki online</p>
-                <hr class="card-divider">
-                <div class="contact-info">
-                    <div class="contact-links-row">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="mailto:facetkaodmatmy@example.com" id="email-link"><i class="fas fa-envelope"></i></a>
+        </nav>
+    </header>
+    <main>
+        <section id="home" class="card-container">
+            <div class="business-card">
+                <div class="card-logo">
+                    <img src="pics/logo.png" alt="Logo">
+                </div>
+                <div class="card-content">
+                    <p class="card-subtitle">Profesjonalne korepetycje z matematyki online</p>
+                    <hr class="card-divider">
+                    <div class="contact-info">
+                        <div class="contact-links-row">
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="mailto:facetkaodmatmy@example.com" id="email-link"><i class="fas fa-envelope"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
+        <section id="o-mnie" class="content-section">
+            <h2>O mnie</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. ...</p>
+        </section>
+        <section id="cennik" class="content-section">
+            <h2>Cennik</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. ...</p>
+        </section>
+        <section id="zasady" class="content-section">
+            <h2>Zasady</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. ...</p>
+        </section>
     </main>
+    <script src="script.js"></script>
 </body>
 </html>
