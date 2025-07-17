@@ -3,9 +3,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if(emailLink) {
         emailLink.addEventListener('click', function(event) {
             event.preventDefault();
-            const email = 'facetkaodmatmy@example.com';
+            const email = 'facetka@odmatmy.pl';
             navigator.clipboard.writeText(email).then(function() {
-                alert('Email address copied to clipboard!');
+                alert('Adres skopiowany do schowka!');
             }, function(err) {
                 console.error('Could not copy text: ', err);
             });
