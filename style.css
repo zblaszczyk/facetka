@@ -159,6 +159,30 @@ main {
     font-family: 'Nothing You Could Do', cursive;
 }
 
+#o-mnie .business-card ul {
+    text-align: left;
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 0;
+    list-style: none;
+}
+
+#o-mnie .business-card li {
+    text-align: justify;
+    margin-bottom: 10px;
+    padding-left: 25px;
+    position: relative;
+}
+
+#o-mnie .business-card li::before {
+    content: '\2714';
+    color: #E57373;
+    font-size: 1.2em;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
 .cennik-table {
     width: 80%;
     max-width: 600px;
