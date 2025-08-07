@@ -169,15 +169,20 @@ main {
 
 #o-mnie .business-card li {
     text-align: justify;
-    margin-bottom: 10px;
-    padding-left: 25px;
+    margin-bottom: 15px;
+    padding-left: 35px;
     position: relative;
+    line-height: 1.6;
 }
 
 #o-mnie .business-card li::before {
-    content: '\2714';
-    color: #E57373;
-    font-size: 1.2em;
+    content: '';
+    background-image: url('pics/bullet.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 25px;
+    height: 25px;
     position: absolute;
     left: 0;
     top: 0;
