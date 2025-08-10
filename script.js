@@ -12,13 +12,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Handle navigation menu links for smooth scrolling
     document.querySelectorAll('.dropdown-content a').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
         });
     });
 });

@@ -4,6 +4,7 @@ body {
     padding: 0;
     background: linear-gradient(to bottom, #fff5e6, #f8d7da);
     color: #333;
+    scroll-behavior: smooth;
 }
 
 header {
@@ -83,12 +84,13 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: transform 0.5s;
+    transition: transform 0.5s, box-shadow 0.3s ease;
     transform-style: preserve-3d;
 }
 
 .business-card:hover {
     transform: rotateY(5deg) rotateX(5deg);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
 
 .card-logo img {
@@ -143,6 +145,33 @@ main {
     margin-right: 0;
 }
 
+.cta-section {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: #E57373;
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(229, 115, 115, 0.3);
+    border: none;
+    cursor: pointer;
+    font-family: 'Raleway', sans-serif;
+}
+
+.cta-button:hover {
+    background-color: #d65a5a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(229, 115, 115, 0.4);
+}
+
 .content-section {
     padding: 100px 20px;
     min-height: 100vh;
@@ -151,12 +180,36 @@ main {
     justify-content: center;
     align-items: center;
     text-align: center;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .content-section h2 {
     font-size: 3rem;
     margin-bottom: 20px;
     font-family: 'Nothing You Could Do', cursive;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.content-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(to right, #E57373, #f8d7da);
+    border-radius: 2px;
 }
 
 #o-mnie .business-card ul {
@@ -349,6 +402,68 @@ main {
     color: #E57373;
 }
 
+.contact-item .contact-value a:hover {
+    color: #E57373 !important;
+    cursor: pointer !important;
+}
+
+/* Force Facebook link to behave correctly */
+.contact-item:nth-child(4) .contact-value a {
+    color: #333 !important;
+    text-decoration: none !important;
+    transition: color 0.2s ease !important;
+    cursor: pointer !important;
+    pointer-events: auto !important;
+}
+
+.contact-item:nth-child(4) .contact-value a:hover {
+    color: #E57373 !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+}
+
+.contact-link-button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    color: #333 !important;
+    text-decoration: none !important;
+    transition: color 0.2s ease !important;
+    cursor: pointer !important;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+}
+
+.contact-link-button:hover {
+    color: #E57373 !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+}
+
+.contact-value a[target="_blank"] {
+    cursor: pointer;
+}
+
+.contact-value a[target="_blank"]:hover {
+    color: #E57373 !important;
+    cursor: pointer;
+}
+
+.contact-item .contact-value a {
+    color: #333 !important;
+    text-decoration: none !important;
+    transition: color 0.2s ease !important;
+    cursor: pointer !important;
+}
+
+.contact-item .contact-value a:hover {
+    color: #E57373 !important;
+    cursor: pointer !important;
+}
+
 .contact-info-notes {
     margin-top: 30px;
     text-align: left;
@@ -503,6 +618,11 @@ main {
 
     .contact-links-row a i {
         font-size: 1.5rem;
+    }
+
+    .cta-button {
+        padding: 12px 25px;
+        font-size: 1rem;
     }
 
     .content-section h2 {
