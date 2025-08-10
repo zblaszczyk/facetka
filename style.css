@@ -258,7 +258,7 @@ main {
 }
 
 .business-card li:not(.pricing-category li) {
-    text-align: justify;
+    text-align: left;
     margin-bottom: 10px;
     padding-left: 35px;
     position: relative;
