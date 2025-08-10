@@ -88,9 +88,22 @@ main {
     transform-style: preserve-3d;
 }
 
-.business-card:hover {
+/* Disable hover effect on main business card to prevent interference with links */
+.card-container .business-card:hover {
+    transform: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Keep hover effect for other business cards, but disable for contact section */
+.content-section .business-card:hover {
     transform: rotateY(5deg) rotateX(5deg);
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Disable hover effect for contact section business card to prevent interference with links */
+#kontakt .business-card:hover {
+    transform: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .card-logo img {
@@ -116,6 +129,8 @@ main {
 .contact-info {
     margin-top: 10px;
     margin-bottom: 20px;
+    position: relative;
+    z-index: 50;
 }
 
 .contact-links-row {
@@ -127,11 +142,23 @@ main {
 }
 
 .contact-links-row a {
-    text-decoration: none;
-    color: #333;
+    text-decoration: none !important;
+    color: #333 !important;
     font-weight: bold;
     display: flex;
     align-items: center;
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    transition: color 0.2s ease;
+    position: relative;
+    z-index: 100;
+    /* Chrome-specific fixes */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /* Ensure proper stacking context */
+    transform: translateZ(0);
 }
 
 .contact-links-row a i {
@@ -143,6 +170,15 @@ main {
 .contact-links-row a:nth-child(1) i,
 .contact-links-row a:nth-child(2) i {
     margin-right: 0;
+}
+
+.contact-links-row a:hover {
+    color: #E57373 !important;
+    cursor: pointer !important;
+}
+
+.contact-links-row a:hover i {
+    color: #d65a5a !important;
 }
 
 .cta-section {
@@ -212,7 +248,8 @@ main {
     border-radius: 2px;
 }
 
-#o-mnie .business-card ul {
+/* Common list styles - exclude pricing categories */
+.business-card ul:not(.pricing-category ul) {
     text-align: left;
     width: 100%;
     box-sizing: border-box;
@@ -220,15 +257,15 @@ main {
     list-style: none;
 }
 
-#o-mnie .business-card li {
+.business-card li:not(.pricing-category li) {
     text-align: justify;
-    margin-bottom: 0; /* Reduced space after first-level bullet */
+    margin-bottom: 10px;
     padding-left: 35px;
     position: relative;
     line-height: 1.6;
 }
 
-#o-mnie .business-card li::before {
+.business-card li:not(.pricing-category li)::before {
     content: '';
     background-image: url('pics/bullet.png');
     background-size: contain;
@@ -239,6 +276,11 @@ main {
     position: absolute;
     left: 0;
     top: 0;
+}
+
+/* Specific override for o-mnie section */
+#o-mnie .business-card li {
+    margin-bottom: 0; /* Reduced space after first-level bullet */
 }
 
 .pricing-notes {
@@ -247,61 +289,26 @@ main {
     width: 100%;
 }
 
-.pricing-notes ul {
-    list-style: none;
-    padding-left: 0;
-}
-
-.pricing-notes li {
-    text-align: justify;
-    margin-bottom: 10px;
-    padding-left: 35px;
-    position: relative;
-    line-height: 1.6;
-}
-
-.pricing-notes li::before {
-    content: '';
-    background-image: url('pics/bullet.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 25px;
-    height: 25px;
-    position: absolute;
-    left: 0;
-    top: 0;
-}
-
+/* Add margin-bottom only to pricing categories */
 .pricing-categories {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    width: 100%;
     margin-bottom: 30px;
 }
 
-.pricing-category {
-    background-color: #f8f9fa;
-    border-radius: 15px;
-    padding: 25px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-    border-left: 4px solid #E57373;
-}
-
-.pricing-category h3 {
-    color: #E57373;
-    font-size: 1.4rem;
-    margin-bottom: 20px;
-    text-align: center;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 700;
-}
-
+/* Pricing category specific styles */
 .pricing-category ul {
     list-style: none;
     padding-left: 0;
     margin: 0;
+}
+
+.pricing-category li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #e9ecef;
+    text-align: left;
+    line-height: 1.4;
 }
 
 .pricing-category li {
@@ -354,6 +361,12 @@ main {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
 }
 
+/* Ensure links work even when parent is hovered */
+.contact-item:hover .contact-value a {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+}
+
 .contact-icon {
     background-color: #E57373;
     color: white;
@@ -392,71 +405,22 @@ main {
     font-weight: 500;
 }
 
-.contact-value a {
-    color: #333;
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-.contact-value a:hover {
-    color: #E57373;
-}
-
-.contact-item .contact-value a:hover {
-    color: #E57373 !important;
-    cursor: pointer !important;
-}
-
-/* Force Facebook link to behave correctly */
-.contact-item:nth-child(4) .contact-value a {
-    color: #333 !important;
-    text-decoration: none !important;
-    transition: color 0.2s ease !important;
-    cursor: pointer !important;
-    pointer-events: auto !important;
-}
-
-.contact-item:nth-child(4) .contact-value a:hover {
-    color: #E57373 !important;
-    cursor: pointer !important;
-    text-decoration: none !important;
-}
-
-.contact-link-button {
-    background: none;
-    border: none;
-    padding: 0;
-    margin: 0;
-    color: #333 !important;
-    text-decoration: none !important;
-    transition: color 0.2s ease !important;
-    cursor: pointer !important;
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    line-height: inherit;
-}
-
-.contact-link-button:hover {
-    color: #E57373 !important;
-    cursor: pointer !important;
-    text-decoration: none !important;
-}
-
-.contact-value a[target="_blank"] {
-    cursor: pointer;
-}
-
-.contact-value a[target="_blank"]:hover {
-    color: #E57373 !important;
-    cursor: pointer;
-}
-
+/* Contact section link styles */
 .contact-item .contact-value a {
     color: #333 !important;
     text-decoration: none !important;
-    transition: color 0.2s ease !important;
+    transition: color 0.2s ease;
     cursor: pointer !important;
+    pointer-events: auto !important;
+    position: relative;
+    z-index: 200;
+    /* Chrome-specific fixes */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /* Ensure proper stacking context */
+    transform: translateZ(0);
 }
 
 .contact-item .contact-value a:hover {
@@ -470,40 +434,18 @@ main {
     width: 100%;
 }
 
-.contact-info-notes ul {
-    list-style: none;
-    padding-left: 0;
-}
-
-.contact-info-notes li {
-    text-align: justify;
-    margin-bottom: 10px;
-    padding-left: 35px;
-    position: relative;
-    line-height: 1.6;
-}
-
-.contact-info-notes li::before {
-    content: '';
-    background-image: url('pics/bullet.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 25px;
-    height: 25px;
-    position: absolute;
-    left: 0;
-    top: 0;
-}
-
-.offer-categories {
+/* Common category grid styles */
+.offer-categories,
+.pricing-categories {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
     width: 100%;
 }
 
-.offer-category {
+/* Common category card styles */
+.offer-category,
+.pricing-category {
     background-color: #f8f9fa;
     border-radius: 15px;
     padding: 25px;
@@ -511,7 +453,8 @@ main {
     border-left: 4px solid #E57373;
 }
 
-.offer-category h3 {
+.offer-category h3,
+.pricing-category h3 {
     color: #E57373;
     font-size: 1.4rem;
     margin-bottom: 20px;
@@ -520,31 +463,11 @@ main {
     font-weight: 700;
 }
 
-.offer-category ul {
+.offer-category ul,
+.pricing-category ul {
     list-style: none;
     padding-left: 0;
     margin: 0;
-}
-
-.offer-category li {
-    text-align: justify;
-    margin-bottom: 10px;
-    padding-left: 35px;
-    position: relative;
-    line-height: 1.6;
-}
-
-.offer-category li::before {
-    content: '';
-    background-image: url('pics/bullet.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 25px;
-    height: 25px;
-    position: absolute;
-    left: 0;
-    top: 0;
 }
 
 .cennik-table {
