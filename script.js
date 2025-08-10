@@ -12,6 +12,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Handle CTA button for smooth scrolling
+    const ctaButton = document.querySelector('.cta-button');
+    if(ctaButton) {
+        ctaButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetElement = document.getElementById('o-mnie');
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+    }
+
     // Handle navigation menu links for smooth scrolling
     document.querySelectorAll('.dropdown-content a').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
